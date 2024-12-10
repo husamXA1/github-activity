@@ -17,5 +17,11 @@ if data:
 				print(f"Created {event["payload"]["ref_type"]} {event["payload"]["ref"] or ""}")
 			case "ForkEvent":
 				print(f"Forked on {event["payload"]["forkee"]["full_name"]}")
+			case "PushEvent":
+				print(f"Pushed {event["payload"]["size"]} commit{"s" if event["payload"]["size"] > 1 else ""} on ", end="")
+				if event["payload"]["ref"].split("/")[1] == "tags":
+					print(f"tag {event["payload"]["ref"].split("/")[-1]}")
+				else:
+					print(f"{event["payload"]["ref"].split("/")[-1]} branch")
 			case _:
 				print(f"{event["type"]}")
