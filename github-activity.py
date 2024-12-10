@@ -10,4 +10,5 @@ with urllib.request.urlopen(url) as response:
     data = json.loads(response.read().decode('utf-8'))
 
 if data:
-	print(data)
+	for event in data:
+		print(f"- {event["type"]} on repository {event["repo"]["name"]} at {event["created_at"]}")
