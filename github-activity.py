@@ -11,4 +11,9 @@ with urllib.request.urlopen(url) as response:
 
 if data:
 	for event in data:
-		print(f"- {event["type"]} on repository {event["repo"]["name"]} at {event["created_at"]}")
+		print(f"[{event["created_at"]}] {event["repo"]["name"]}", end=": ")
+		match event["type"]:
+			case "CreateEvent":
+				print(f"Created {event["payload"]["ref_type"]} {event["payload"]["ref"] or ""}")
+			case _:
+				print(f"{event["type"]}")
