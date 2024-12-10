@@ -15,5 +15,7 @@ if data:
 		match event["type"]:
 			case "CreateEvent":
 				print(f"Created {event["payload"]["ref_type"]} {event["payload"]["ref"] or ""}")
+			case "ForkEvent":
+				print(f"Forked on {event["payload"]["forkee"]["full_name"]}")
 			case _:
 				print(f"{event["type"]}")
