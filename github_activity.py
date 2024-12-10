@@ -26,8 +26,9 @@ def get_activities(username):
 	
 	return result.strip()
 
-if len(sys.argv) != 2:
-	print("USAGE: github-activity [USERNAME]")
-	sys.exit(1)
+if __name__ == "__main__":
+	if len(sys.argv) != 2:
+		print("USAGE: github-activity [USERNAME]")
+		sys.exit(1)
 
-print(get_activities(sys.argv[1]))
+	print(get_activities(sys.argv[1]))
