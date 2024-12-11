@@ -21,6 +21,8 @@ def get_activities(username):
 						result += f"tag {event["payload"]["ref"].split("/")[-1]}\n"
 					else:
 						result += f"{event["payload"]["ref"].split("/")[-1]} branch\n"
+				case "WatchEvent":
+					result += "Starred repository\n"
 				case _:
 					result += f"{event["type"]}\n"
 	
