@@ -1,12 +1,22 @@
-import sys, urllib.request, json
+import sys, urllib.request, urllib.error, json
 
 def get_activities(username):
 	url = f"https://api.github.com/users/{username}/events"
 
-	with urllib.request.urlopen(url) as response:
-		data = json.loads(response.read().decode('utf-8'))
+	try:
+		with urllib.request.urlopen(url) as response:
+			data = json.loads(response.read().decode('utf-8'))
+	except urllib.error.HTTPError as e:
+		print(e)
+		if e.getcode() == 404:
+			print("No such username exist!")
+		sys.exit(1)
+	except urllib.error.URLError as e:
+		print(e.reason)
+		print("Are you connected to the internet?")
+		sys.exit(2)
 
-	result = ""
+	result = f"Activites of {username}:\n"
 	if data:
 		for event in data:
 			result += f"[{event["created_at"]}] {event["repo"]["name"]}: "
