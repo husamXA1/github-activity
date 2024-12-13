@@ -1,6 +1,15 @@
 import sys, urllib.request, urllib.error, json
 
 def get_activities(username):
+	"""
+	Fetches the latest activities of a GitHub user using the GitHub Activity API.
+	
+	Parameters:
+	- username (str): The GitHub username whose activities are to be retrieved.
+
+	Returns:
+	- str: A string containing the activities of the user, one activity per line.
+	"""	
 	url = f"https://api.github.com/users/{username}/events"
 
 	try:
